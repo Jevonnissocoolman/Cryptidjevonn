@@ -1822,7 +1822,7 @@ local mondrian = {
             }
         end
 	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
-		card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
+		card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.bonus
 		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
 		return {calculated = true}
 	end
@@ -1831,7 +1831,7 @@ local mondrian = {
 local mondrian_sprite = {
     object_type = "Atlas",
     key = "mondrian",
-    path = "j_cry_chad.png",
+    path = "j_cry_sus.png",
     px = 71,
     py = 95
 }
