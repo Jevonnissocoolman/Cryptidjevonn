@@ -1789,6 +1789,50 @@ local pirate_dagger_sprite = {
     px = 71,
     py = 95
 }
+local mondrian = {
+    object_type = "Joker",
+    name = "cry-mondrian",
+    key = "mondrian",
+    pos = {x = 0, y = 0},
+    config = {extra = {Xchips = 1, bonus = 0.25}},
+    loc_txt = {
+        name = 'Mondrian',
+        text = {
+			"This joker gains",
+			"{X:chips,C:white}#2#{} Chips",
+			"If no {C:attention}discards{}",
+			"were used this round{}",
+			"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
+		}
+    },
+    rarity = 2,
+    cost = 6,
+    discovered = true,
+    blueprint_compat = true,
+    perishable_compat = false,
+    atlas = "mondrian",
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.Xchips, center.ability.extra.bonus}}
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and not context.before and not context.after then
+            return {
+                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+                Xchip_mod = card.ability.extra.Xchips
+            }
+        end
+	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
+		card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.bonus
+	end
+    end
+}
+local mondrian_sprite = {
+    object_type = "Atlas",
+    key = "mondrian",
+    path = "j_cry_apjoker.png",
+    px = 71,
+    py = 95
+}
 local jollysus = {
     object_type = "Joker",
     name = "cry-jollysus",
