@@ -1819,7 +1819,7 @@ local mondrian = {
                 Xmult_mod = card.ability.extra.x_mult
             }
         end
-        if context.setting_blind and not context.blueprint then
+        if context.end_of_round and not context.blueprint then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
             return {calculated = true}
