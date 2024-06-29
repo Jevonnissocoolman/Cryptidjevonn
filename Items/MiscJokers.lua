@@ -8,7 +8,7 @@ local dropshot = {
         name = 'Dropshot',
         text = {
         "This Joker gains {X:mult,C:white} X#1# {} Mult for",
-		"each played,{C:attention}nonscoring{} {V:1}#2#{} card,",
+		"each played, {C:attention}nonscoring{} {V:1}#2#{} card,",
 		"suit changes every round",
         "{C:inactive}(Currently {X:mult,C:white} X#3# {C:inactive} Mult)"
         }
@@ -1673,6 +1673,122 @@ object_type = "Atlas",
     px = 71,
     py = 95
 }
+local monkey_dagger = {
+	object_type = "Joker",
+	name = "cry-Monkey Dagger",
+	key = "monkey_dagger",
+	pos = {x = 0, y = 0},
+	config = {extra = {chips = 0}},
+	loc_txt = {
+		name = 'Monkey Dagger',
+		text = {
+			"When {C:attention}Blind{} is selected,",
+			"destroy Joker to the left",
+			"and permanently add {C:attention}quadruple{}",
+			"its sell value to this {C:chips}Chips{}",
+			"{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
+		}
+	},
+	rarity = 2,
+	cost = 5,
+	discovered = true,
+	perishable_compat = false,
+	    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.chips}}
+    end,
+	atlas = "monkey_dagger",
+		calculate = function(self, card, context)
+        if context.cardarea == G.jokers and (card.ability.extra.chips > 0) and not context.before and not context.after then
+            return {
+                message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+                chip_mod = card.ability.extra.chips
+            }
+        end
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then my_pos = i; break end
+		end
+        if context.setting_blind and not (context.blueprint_card or self).getting_sliced and my_pos and G.jokers.cards[my_pos-1] and not G.jokers.cards[my_pos-1].ability.eternal and not G.jokers.cards[my_pos-1].getting_sliced then 
+            local sliced_card = G.jokers.cards[my_pos-1]
+            sliced_card.getting_sliced = true
+            G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+            G.E_MANAGER:add_event(Event({func = function()
+                G.GAME.joker_buffer = 0
+                card.ability.extra.chips = card.ability.extra.chips + sliced_card.sell_cost*5
+                card:juice_up(0.8, 0.8)
+                sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
+                play_sound('slice1', 0.96+math.random()*0.08)
+            return true end }))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips+4*sliced_card.sell_cost}}, colour = G.C.CHIPS, no_juice = true})
+			return {calculated = true}
+        end
+    end
+}
+local monkey_dagger_sprite = {
+	object_type = "Atlas",
+    key = "monkey_dagger",
+    path = "j_cry_monkey_dagger.png",
+    px = 71,
+    py = 95
+}
+local pirate_dagger = {
+	object_type = "Joker",
+	name = "cry-Pirate Dagger",
+	key = "pirate_dagger",
+	pos = {x = 0, y = 0},
+	config = {extra = {Xchips = 1}},
+	loc_txt = {
+		name = 'Pirate Dagger',
+		text = {
+			"When {C:attention}Blind{} is selected,",
+			"destroy Joker to the right",
+			"and gain {C:attention}one-fourth{}",
+			"its sell value as {X:chips,C:white} XChips {}",
+			"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
+		}
+	},
+	rarity = 2,
+	cost = 7,
+	discovered = true,
+	perishable_compat = false,
+	    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.Xchips}}
+    end,
+	atlas = "pirate_dagger",
+		calculate = function(self, card, context)
+        if context.cardarea == G.jokers and (card.ability.extra.Xchips > 1) and not context.before and not context.after then
+            return {
+                message = localize{type='variable',key='a_xchips',vars={card.ability.extra.Xchips}},
+                Xchip_mod = card.ability.extra.Xchips
+            }
+        end
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then my_pos = i; break end
+		end
+        if context.setting_blind and not (context.blueprint_card or self).getting_sliced and my_pos and G.jokers.cards[my_pos+1] and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then 
+            local sliced_card = G.jokers.cards[my_pos+1]
+            sliced_card.getting_sliced = true
+            G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+            G.E_MANAGER:add_event(Event({func = function()
+                G.GAME.joker_buffer = 0
+                card.ability.extra.Xchips = card.ability.extra.Xchips + sliced_card.sell_cost*0.5
+                card:juice_up(0.8, 0.8)
+                sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
+                play_sound('slice1', 0.96+math.random()*0.08)
+            return true end }))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xchips', vars = {card.ability.extra.Xchips+0.5*sliced_card.sell_cost}}, colour = G.C.CHIPS, no_juice = true})
+			return {calculated = true}
+        end
+    end
+}
+local pirate_dagger_sprite = {
+	object_type = "Atlas",
+    key = "pirate_dagger",
+    path = "j_cry_pirate_dagger.png",
+    px = 71,
+    py = 95
+}
 local jollysus = {
     object_type = "Joker",
     name = "cry-jollysus",
@@ -1772,6 +1888,7 @@ local bubblem = {
     rarity = 1,
     cost = 2,
     discovered = true,
+    eternal_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
 	info_queue[#info_queue+1] = G.P_CENTERS.e_foil
@@ -1977,4 +2094,4 @@ return {name = "Misc. Jokers",
             end
 
         end,
-        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, jollysus_sprite, bubblem_sprite, mstack_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, jollysus, bubblem, mstack,}}
+        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, jollysus_sprite, bubblem_sprite, mstack_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, jollysus, bubblem, mstack, monkey_dagger, pirate_dagger,}}
