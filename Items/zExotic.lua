@@ -137,7 +137,7 @@ local exponentia = {
     object_type = "Joker",
 	name = "cry-Exponentia",
 	key = "exponentia",
-	config = {extra = {pow_mult = 1.1, pow_mult_mod = 0.01}},
+	config = {extra = {pow_mult = 1, pow_mult_mod = 0.01}},
 	pos = {x = 0, y = 0},
 	loc_txt = {
         name = 'Exponentia',
@@ -412,7 +412,8 @@ local primus = {
         name = 'Primus',
         text = {
 			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
-			"wwwwwwqqqq",
+			"if all cards in played hand are",
+			"{C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{}, or {C:attention}7s{}",
 			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
         }
     },
@@ -426,8 +427,8 @@ local primus = {
 	calculate = function(self, card, context)
 	local check = true
 	if context.scoring_hand then
-		for i = 1, #context.scoring_hand do
-                        if context.scoring_hand[i]:get_id() == (4 or 6 or 8 or 9 or 10 or 11 or 12 or 13) then
+		for i = 1, #context.full_hand do
+                        if context.full_hand[i]:get_id() == 4 or 6 or 8 or 9 or 10 or 11 or 12 or 13 then
                             check = false
                         end
         	end
