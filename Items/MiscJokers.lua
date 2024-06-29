@@ -155,6 +155,7 @@ local queensgambit = {
     discovered = true,
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+    end,
     atlas = "queens_gambit",
     config = {extra = {type = "Straight Flush"}},
     calculate = function(self, card, context)
