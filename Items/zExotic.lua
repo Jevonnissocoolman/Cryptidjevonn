@@ -185,6 +185,7 @@ local speculo = {
             "Creates a {C:dark_edition}Negative{} copy",
             "of a random {C:attention}Joker{}",
             "at the end of the {C:attention}shop",
+	    "{C:inactive,s:0.8}Does not copy other Speculo{}",
         }
     },
 	rarity = "cry_exotic",
@@ -322,7 +323,7 @@ local effarcire = {
 	loc_txt = {
         name = 'Effarcire',
         text = {
-			"Always draw {C:green}full deck{} to hand",
+			"Draw {C:green}full deck{} to hand",
 			"when {C:attention}Blind{} is selected"
 		}
     },
