@@ -402,9 +402,58 @@ local crustulum_sprite = {
     px = 71,
     py = 95
 }
-	
+local primus = {
+    object_type = "Joker",
+	name = "cry-primus",
+	key = "primus",
+	config = {extra = {pow_mult = 1, pow_mult_mod = 0.1}},
+	pos = {x = 0, y = 0},
+	loc_txt = {
+        name = 'Exponentia',
+        text = {
+			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
+			"hand played aldalsk",
+			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
+        }
+    },
+	rarity = "cry_exotic",
+	cost = 53,
+	discovered = true,
+    blueprint_compat = true,
+	perishable_compat = false,
+	atlas = "primus",
+	soul_pos = {x = 2, y = 0, extra = {x = 1, y = 0}},
+	calculate = function(self, card, context)
+	local primuscheck = true
+	for i = 1, #context.scoring_hand do
+                        if context.scoring_hand[i]:get_id() == (4 or 6 or 8 or 9 or 10 or 11 or 12 or 13) then
+                            primuscheck = false
+                        end
+        end
+	if context.cardarea == G.jokers and primuscheck and context.before and not context.blueprint then
+			card.ability.extra.pow_mult = card.ability.extra.pow_mult + card.ability.extra.pow_mult_mod
+	end
+        if context.cardarea == G.jokers and (card.ability.extra.pow_mult > 1) and not context.before and not context.after then
+            return {
+                message = "^"..card.ability.extra.pow_mult.." Mult",
+                pow_mult_mod = card.ability.extra.pow_mult,
+                colour = G.C.DARK_EDITION
+            }
+        end
+	end,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.pow_mult_mod, center.ability.extra.pow_mult}}
+    end
+}
+local primus_sprite = {
+    object_type = "Atlas",
+    key = "primus",
+    path = "j_cry_exponentia.png",
+    px = 71,
+    py = 95
+}	
 
-G.P_JOKER_RARITY_POOLS["cry_exotic"] = {iterum, universum, exponentia, speculo, redeo, tenebris, effarcire, crustulum}
+G.P_JOKER_RARITY_POOLS["cry_exotic"] = {iterum, universum, exponentia, speculo, redeo, tenebris, effarcire, crustulum, primus}
 
 return {name = "Exotic Jokers", 
         init = function()
@@ -512,4 +561,4 @@ return {name = "Exotic Jokers",
                 end
             end
         end,
-        items = {gateway_sprite, iterum_sprite, universum_sprite, exponentia_sprite, speculo_sprite, redeo_sprite, tenebris_sprite, effarcire_sprite, crustulum_sprite, gateway, iterum, universum, exponentia, speculo, redeo, tenebris, effarcire, crustulum,}}
+        items = {gateway_sprite, iterum_sprite, universum_sprite, exponentia_sprite, speculo_sprite, redeo_sprite, tenebris_sprite, effarcire_sprite, crustulum_sprite, primus_sprite, gateway, iterum, universum, exponentia, speculo, redeo, tenebris, effarcire, crustulum, primus,}}
