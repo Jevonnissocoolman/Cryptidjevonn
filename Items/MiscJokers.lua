@@ -1631,7 +1631,7 @@ text = {
 "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)"
 }
 },
-rarity = 2,
+rarity = 3,
 cost = 7,
 discovered = true,
 perishable_compat = false,
@@ -1689,7 +1689,7 @@ local monkey_dagger = {
 			"{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
 		}
 	},
-	rarity = 2,
+	rarity = 1,
 	cost = 5,
 	discovered = true,
 	perishable_compat = false,
@@ -1742,13 +1742,13 @@ local pirate_dagger = {
 		text = {
 			"When {C:attention}Blind{} is selected,",
 			"destroy Joker to the right",
-			"and gain {C:attention}one-fourth{}",
+			"and gain {C:attention}one-fourth{} of",
 			"its sell value as {X:chips,C:white} XChips {}",
 			"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
 		}
 	},
-	rarity = 2,
-	cost = 7,
+	rarity = 3,
+	cost = 6,
 	discovered = true,
 	perishable_compat = false,
 	    loc_vars = function(self, info_queue, center)
