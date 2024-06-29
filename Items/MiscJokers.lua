@@ -145,30 +145,30 @@ local queensgambit = {
     pos = {x = 0, y = 0},
     loc_txt = {
         name = 'Queen\'s Gambit',
-        text = { "If {C:attention}poker hand{} is a",
-        "{C:attention}Royal Flush{}, destroy scored",
-        "{C:attention}Queen{} and create a",
-        "{C:dark_edition}Negative {}{C:red}Rare{}{C:attention} Joker{}"}
+        text = {
+            "If {C:attention}poker hand{} is a",
+            "{C:attention}Royal Flush{}, destroy scored",
+            "{C:attention}Queen{} and create a",
+            "{C:dark_edition}Negative {}{C:red}Rare{}{C:attention} Joker{}"
+        }
     },
     rarity = 3,
     cost = 10,
     discovered = true,
     loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
     end,
     atlas = "queens_gambit",
-    config = {extra = {type = "Straight Flush"}},
+    config = { extra = { type = "Straight Flush" } },
     calculate = function(self, card, context)
         if context.destroying_card and not context.blueprint then
             if G.GAME.current_round.current_hand.handname == "Royal Flush" and SMODS.Ranks[context.destroying_card.base.value].key == "Queen" then
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_joker'), colour = G.C.FILTER})
+                card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize('k_plus_joker'), colour = G.C.FILTER })
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     func = function()
                         local card = create_card("Joker", G.jokers, nil, 0.99, nil, nil, nil, "cry_gambit")
-                        card:set_edition({
-                            negative = true
-                        })
+                        card:set_edition({ negative = true })
                         card:add_to_deck()
                         G.jokers:emplace(card)
                         card:start_materialize()
@@ -176,7 +176,7 @@ local queensgambit = {
                     end
                 }))
                 return true
-            end 
+            end
         end
     end
 }
