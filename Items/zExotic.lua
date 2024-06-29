@@ -458,7 +458,7 @@ local primus = {
 local primus_sprite = {
     object_type = "Atlas",
     key = "primus",
-    path = "j_cry_redeo.png",
+    path = "j_cry_primus.png",
     px = 71,
     py = 95
 }	
