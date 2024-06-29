@@ -1794,16 +1794,14 @@ local mondrian = {
     name = "cry-mondrian",
     key = "mondrian",
     pos = {x = 0, y = 0},
-    config = {
-        extra = {extra = 0.25, x_mult = 1},
-        loc_txt = {
-            name = 'mondrian',
-            text = {
+    config = {extra = {extra = 0.25, x_mult = 1}},
+    loc_txt = {
+    name = 'Mondrian',
+    text = {
                 "This Joker gains {X:mult,C:white} X#1# {} Mult",
                 "when {C:attention}Jolly Joker{} is sold",
                 "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
-            }
-        }
+           }
     },
     rarity = 2,
     cost = 7,
@@ -1821,7 +1819,7 @@ local mondrian = {
                 Xmult_mod = card.ability.extra.x_mult
             }
         end
-        if context.end_of_round and not context.blueprint then
+        if context.setting_blind and not context.blueprint then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
             return {calculated = true}
