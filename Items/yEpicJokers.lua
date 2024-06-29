@@ -3,7 +3,7 @@ local googol_play = {
 	object_type = "Joker",
 	name = "cry-Googol Play Card",
 	key = "googol_play",
-	config = {extra = {Xmult = 1e100, odds = 10}},
+	config = {extra = {Xmult = 1e100, odds = 8}},
 	pos = {x = 0, y = 0},
 	loc_txt = {
         name = 'Googol Play Card',
@@ -84,7 +84,7 @@ local negative = {
 	name = "cry-Negative Joker",
 	key = "negative",
 	pos = {x = 0, y = 0},
-	config = {extra = 3},
+	config = {extra = 4},
 	loc_txt = {
         name = 'Negative Joker',
         text = {
@@ -126,7 +126,7 @@ local canvas = {
 			"once for {C:attention}every{} non-{C:blue}Common{C:attention} Joker{}",
 			"to the right of this Joker"
 		}
-    },
+    	},
 	rarity = "cry_epic",
 	cost = 15,
 	discovered = true,
@@ -367,9 +367,9 @@ local number_blocks = {
 	loc_txt = {
         name = 'Number Blocks',
         text = {
-			"Earn {C:money}$#1#{} at end of round,",
-			"permanently increase payout by",
-			"{C:money}$#2#{} for each {C:attention}#3#{} held in hand,",
+			"Earn {C:money}$#1#{} at end of round",
+			"Increase payout by {C:money}$#2#{}",
+			"for each {C:attention}#3#{} held in hand,",
 			"rank changes every round"
         }
     },
@@ -622,9 +622,9 @@ local oldcandy = {
 	loc_txt = {
 	name = 'Nostalgic Candy',
 	text = {
-			"Permanently gain",
+			"Sell this card to",
+			"permanently gain",
 			"{C:attention}+#1#{} hand size",
-			"when sold"
 		}
 	},
     loc_vars = function(self, info_queue, center)
@@ -658,7 +658,8 @@ local caramel = {
 	loc_txt = {
         name = 'Caramel',
         text = {
-        "All cards scored give {X:mult,C:white}X#1#{} Mult",
+        "Each played card gives",
+	"{X:mult,C:white}X#1#{} Mult when scored",
         "for the next {C:attention}#2#{} rounds",
         }
     	},
