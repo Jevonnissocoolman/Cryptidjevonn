@@ -428,7 +428,7 @@ local primus = {
 	local check = true
 	if context.scoring_hand then
 		for i = 1, #context.full_hand do
-                        if context.full_hand[i]:get_id() == 4 or or context.scoring_hand[i]:get_id() == 6 or context.scoring_hand[i]:get_id() == 8 or context.scoring_hand[i]:get_id() == 9 or context.scoring_hand[i]:get_id() == 10 or context.scoring_hand[i]:get_id() == 11 or context.scoring_hand[i]:get_id() == 12 or context.scoring_hand[i]:get_id() == 13 then
+                        if context.full_hand[i]:get_id() == 4 or context.scoring_hand[i]:get_id() == 6 or context.scoring_hand[i]:get_id() == 8 or context.scoring_hand[i]:get_id() == 9 or context.scoring_hand[i]:get_id() == 10 or context.scoring_hand[i]:get_id() == 11 or context.scoring_hand[i]:get_id() == 12 or context.scoring_hand[i]:get_id() == 13 then
                             check = false
                         end
         	end
