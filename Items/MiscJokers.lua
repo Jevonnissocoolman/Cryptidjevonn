@@ -1799,7 +1799,7 @@ local mondrian = {
         name = 'Mondrian',
         text = {
 			"This joker gains",
-			"{X:chips,C:white}#2#{} Chips",
+			"{X:chips,C:white}X#2#{} Chips",
 			"If no {C:attention}discards{}",
 			"were used this round{}",
 			"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
