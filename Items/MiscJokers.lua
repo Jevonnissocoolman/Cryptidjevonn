@@ -1794,15 +1794,15 @@ local mondrian = {
     name = "cry-mondrian",
     key = "mondrian",
     pos = {x = 0, y = 0},
-    config = {extra = {Xchips = 1, bonus = 0.25}},
+    config = {extra = {xmult = 1, bonus = 0.25}},
     loc_txt = {
         name = 'Mondrian',
         text = {
 			"This joker gains",
-			"{X:chips,C:white}X#2#{} Chips",
+			"{X:mult,C:white}X#2#{} Mult",
 			"If no {C:attention}discards{}",
 			"were used this round{}",
-			"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)"
+			"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)"
 		}
     },
     rarity = 2,
@@ -1812,21 +1812,26 @@ local mondrian = {
     perishable_compat = false,
     atlas = "mondrian",
     loc_vars = function(self, info_queue, center)
-        return {vars = {center.ability.extra.Xchips, center.ability.extra.bonus}}
+        return {vars = {center.ability.extra.xmult, center.ability.extra.bonus}}
     end,
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and not context.before and not context.after then
-                Xchip_mod = card.ability.extra.Xchips
+        if context.cardarea == G.jokers and (card.ability.extra.xmult > 1) and not context.before and not context.after then
+            return {
+                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+                Xmult_mod = card.ability.extra.x_mult
+            }
         end
 	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
-		card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.bonus
+		card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
+		return {calculated = true}
 	end
     end
 }
 local mondrian_sprite = {
     object_type = "Atlas",
     key = "mondrian",
-    path = "j_cry_apjoker.png",
+    path = "j_cry_sus.png",
     px = 71,
     py = 95
 }
