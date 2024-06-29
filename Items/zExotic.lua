@@ -159,7 +159,7 @@ local exponentia = {
             return {
                 message = "^"..card.ability.extra.pow_mult.." Mult",
                 pow_mult_mod = card.ability.extra.pow_mult,
-                colour = G.C.MULT
+                colour = G.C.DARK_EDITION
             }
         end
 	end,
@@ -193,6 +193,10 @@ local speculo = {
     blueprint_compat = true,
 	atlas = "speculo",
 	soul_pos = {x = 1, y = 0, extra = {x = 2, y = 0}},
+	loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
+		info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+	end,
 	calculate = function(self, card, context)
         if context.ending_shop then
             local eligibleJokers = {}
@@ -208,7 +212,7 @@ local speculo = {
                         G.jokers:emplace(card) 
                         return true
                     end}))
-                card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = localize('k_duplicated_ex')})
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_duplicated_ex')})
                 return {calculated = true}
             end
             return
