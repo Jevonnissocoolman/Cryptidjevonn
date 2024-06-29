@@ -8,7 +8,7 @@ local dropshot = {
         name = 'Dropshot',
         text = {
         "This Joker gains {X:mult,C:white} X#1# {} Mult for",
-		"each played, {C:attention}nonscoring{} {V:1}#2#{} card,",
+		"each played,{C:attention}nonscoring{} {V:1}#2#{} card,",
 		"suit changes every round",
         "{C:inactive}(Currently {X:mult,C:white} X#3# {C:inactive} Mult)"
         }
