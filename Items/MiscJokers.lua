@@ -1816,14 +1816,10 @@ local mondrian = {
     end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and (card.ability.extra.xmult > 1) and not context.before and not context.after then
-            return {
-                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.xmult}},
                 Xmult_mod = card.ability.extra.xmult
-            }
         end
 	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
 		card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.bonus
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.xmult}}})
 		return {calculated = true}
 	end
     end
@@ -1831,7 +1827,7 @@ local mondrian = {
 local mondrian_sprite = {
     object_type = "Atlas",
     key = "mondrian",
-    path = "j_cry_m.png",
+    path = "j_cry_big_m.png",
     px = 71,
     py = 95
 }
