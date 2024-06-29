@@ -409,10 +409,10 @@ local primus = {
 	config = {extra = {pow_mult = 1, pow_mult_mod = 0.1}},
 	pos = {x = 0, y = 0},
 	loc_txt = {
-        name = 'Exponentia',
+        name = 'Primus',
         text = {
 			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
-			"if all cards in hand",
+			"Ace 2 3 5 7",
 			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
         }
     },
@@ -434,6 +434,12 @@ local primus = {
 	end
 	if context.cardarea == G.jokers and primuscheck and context.before and not context.blueprint then
 			card.ability.extra.pow_mult = card.ability.extra.pow_mult + card.ability.extra.pow_mult_mod
+			return {
+                    	card_eval_status_text(card, 'extra', nil, nil, nil, {
+                        message = "Upgrade!",
+                        colour = G.C.DARK_EDITION,
+                    	})
+                	}	
 	end
         if context.cardarea == G.jokers and (card.ability.extra.pow_mult > 1) and not context.before and not context.after then
             return {
