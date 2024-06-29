@@ -1816,10 +1816,7 @@ local mondrian = {
     end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and not context.before and not context.after then
-            return {
-                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
                 Xchip_mod = card.ability.extra.Xchips
-            }
         end
 	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
 		card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.bonus
