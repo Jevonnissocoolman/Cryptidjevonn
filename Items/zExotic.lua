@@ -404,44 +404,44 @@ local crustulum_sprite = {
 }
 local primus = {
     object_type = "Joker",
-	name = "cry-primus",
-	key = "primus",
-	config = {extra = {pow_mult = 1, pow_mult_mod = 0.1}},
-	pos = {x = 0, y = 0},
-	loc_txt = {
+    name = "cry-primus",
+    key = "primus",
+    config = {extra = {pow_mult = 1, pow_mult_mod = 0.1}},
+    pos = {x = 0, y = 0},
+    loc_txt = {
         name = 'Primus',
         text = {
-			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
-			"if all cards in played hand are",
-			"{C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{}, or {C:attention}7s{}",
-			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
+            "This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
+            "if all cards in played hand are",
+            "{C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{}, or {C:attention}7s{}",
+            "{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
         }
     },
-	rarity = "cry_exotic",
-	cost = 53,
-	discovered = true,
+    rarity = "cry_exotic",
+    cost = 53,
+    discovered = true,
     blueprint_compat = true,
-	perishable_compat = false,
-	atlas = "primus",
-	soul_pos = {x = 2, y = 0, extra = {x = 1, y = 0}},
-	calculate = function(self, card, context)
-	local check = true
-	if context.scoring_hand then
-		for i = 1, #context.full_hand do
-                        if context.full_hand[i]:get_id() == 4 or context.scoring_hand[i]:get_id() == 6 or context.scoring_hand[i]:get_id() == 8 or context.scoring_hand[i]:get_id() == 9 or context.scoring_hand[i]:get_id() == 10 or context.scoring_hand[i]:get_id() == 11 or context.scoring_hand[i]:get_id() == 12 or context.scoring_hand[i]:get_id() == 13 then
-                            check = false
-                        end
-        	end
-	end
-	if context.cardarea == G.jokers and check and context.before and not context.blueprint then
-			card.ability.extra.pow_mult = card.ability.extra.pow_mult + card.ability.extra.pow_mult_mod
-			return {
-                    	card_eval_status_text(card, 'extra', nil, nil, nil, {
-                        message = "Upgrade!",
-                        colour = G.C.DARK_EDITION,
-                    	})
-                	}	
-	end
+    perishable_compat = false,
+    atlas = "primus",
+    soul_pos = {x = 2, y = 0, extra = {x = 1, y = 0}},
+    calculate = function(self, card, context)
+        local check = true
+        if context.scoring_hand then
+            for i = 1, #context.full_hand do
+                if context.full_hand[i]:get_id() == 4 or context.full_hand[i]:get_id() == 6 or context.full_hand[i]:get_id() == 8 or context.full_hand[i]:get_id() == 9 or context.full_hand[i]:get_id() == 10 or context.full_hand[i]:get_id() == 11 or context.full_hand[i]:get_id() == 12 or context.full_hand[i]:get_id() == 13 then
+                    check = false
+                end
+            end
+        end
+        if context.cardarea == G.jokers and check and context.before and not context.blueprint then
+            card.ability.extra.pow_mult = card.ability.extra.pow_mult + card.ability.extra.pow_mult_mod
+            return {
+                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    message = "Upgrade!",
+                    colour = G.C.DARK_EDITION,
+                })
+            }   
+        end
         if context.cardarea == G.jokers and (card.ability.extra.pow_mult > 1) and not context.before and not context.after then
             return {
                 message = "^"..card.ability.extra.pow_mult.." Mult",
@@ -449,11 +449,12 @@ local primus = {
                 colour = G.C.DARK_EDITION
             }
         end
-	end,
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.extra.pow_mult_mod, center.ability.extra.pow_mult}}
     end
 }
+
 local primus_sprite = {
     object_type = "Atlas",
     key = "primus",
