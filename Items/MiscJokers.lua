@@ -153,6 +153,8 @@ local queensgambit = {
     rarity = 3,
     cost = 10,
     discovered = true,
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue+1] = G.P_CENTERS.e_negative
     atlas = "queens_gambit",
     config = {extra = {type = "Straight Flush"}},
     calculate = function(self, card, context)
@@ -305,6 +307,7 @@ local lucky_joker = {
 	atlas = "lucky_joker",
     enhancement_gate = 'm_lucky',
     loc_vars = function(self, info_queue, center)
+	info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
         return {vars = {center.ability.extra.dollars}}
     end,
     calculate = function(self, card, context)
@@ -321,7 +324,6 @@ local lucky_joker = {
 local lucky_joker_sprite = {
     object_type = "Atlas",
     key = "lucky_joker",
-    
     path = "j_cry_lucky_joker.png",
     px = 71,
     py = 95
@@ -340,7 +342,7 @@ local cursor = {
             "for each card {C:attention}purchased{}",
             "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
         }
-    },
+    	},
 	rarity = 1,
 	cost = 5,
 	discovered = true,
@@ -503,8 +505,8 @@ local triplet_rhythm = {
             "contains {C:attention}exactly{} three {C:attention}3s"
         }
     },
-	rarity = 2,
-	cost = 7,
+	rarity = 1,
+	cost = 6,
 	discovered = true,
     blueprint_compat = true,
 	atlas = "triplet_rhythm",
@@ -1832,7 +1834,7 @@ local mstack = {
             "Retrigger all cards played",
             "once for every {C:attention}2 Jolly Jokers{}",
             "{C:attention}sold{}, up to {C:attention}8 sold{}",
-            "{C:inactive}(Currently{}{C:attention:} #1#{}{C:inactive} retriggers #2#){}",
+            "{C:inactive}(Currently{}{C:attention:} #1#{}{C:inactive} retriggers) #2#{}",
         }
     },
     rarity = 2,
