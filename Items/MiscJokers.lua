@@ -1799,7 +1799,7 @@ local mondrian = {
     name = 'Mondrian',
     text = {
                 "This Joker gains {X:mult,C:white} X#1# {} Mult",
-                "when {C:attention}Jolly Joker{} is sold",
+                "If no {C:attention}discards{} were used this round",
                 "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
            }
     },
@@ -1830,7 +1830,7 @@ local mondrian = {
 local mondrian_sprite = {
     object_type = "Atlas",
     key = "mondrian",
-    path = "j_cry_hunger.png",
+    path = "j_cry_m.png",
     px = 71,
     py = 95
 }
