@@ -1823,7 +1823,7 @@ local mondrian = {
         end
 	if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint then
 		card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.bonus
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.xmult}}})
 		return {calculated = true}
 	end
     end
