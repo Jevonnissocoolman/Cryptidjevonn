@@ -7,8 +7,8 @@ local dropshot = {
 	loc_txt = {
         name = 'Dropshot',
         text = {
-        "This Joker gains {X:mult,C:white} X#1# {} Mult",
-		"per played, {C:attention}nonscoring{} {V:1}#2#{} card,",
+        "This Joker gains {X:mult,C:white} X#1# {} Mult for",
+		"each played, {C:attention}nonscoring{} {V:1}#2#{} card,",
 		"suit changes every round",
         "{C:inactive}(Currently {X:mult,C:white} X#3# {C:inactive} Mult)"
         }
@@ -198,8 +198,9 @@ local wee_fib = {
         name = 'Wee Fibonacci',
         text = {
 		"This Joker gains",
-		"{C:mult}+#2#{} Mult for each scored",
+		"{C:mult}+#2#{} Mult when each played",
 		"{C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{}, or {C:attention}8{}",
+		"is scored"
 		"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"}
     },
 	rarity = 3,
@@ -1138,8 +1139,9 @@ local krustytheclown = {
 	loc_txt = {
         name = 'Krusty the Clown',
         text = {
-			"This Joker gains {X:mult,C:white} X#1# {} Mult",
-			"per {C:attention}card{} scored",
+			"This Joker gains",
+			"{X:mult,C:white} X#1# {} Mult when"
+			"each played {C:attention}card{} is scored",
 			"{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
 		}
     	},
@@ -1185,7 +1187,7 @@ local blurred = {
 	loc_txt = {
         name = 'Blurred Joker',
         text = {
-			"{C:blue}+#1#{} hand(s) when",
+			"Gain {C:blue}+#1#{} hand(s) when",
 			"{C:attention}Blind{} is selected"
 		}
    	},
@@ -1349,8 +1351,9 @@ local antennastoheaven = {
     loc_txt = {
         name = '...Like Antennas to Heaven',
         text = {
-            "This Joker gains {X:chips,C:white} X#1# {} Chips",
-            "per {C:attention}7{} or {C:attention}4{} scored",
+            "This Joker gains",
+	    "{X:chips,C:white} X#1# {} Chips when each played",
+            "{C:attention}7{} or {C:attention}4{} is scored",
             "{C:inactive}(Currently {X:chips,C:white} X#2# {C:inactive} Chips)"
         }
     },
@@ -1658,7 +1661,7 @@ end
                 sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
                 play_sound('slice1', 0.96+math.random()*0.08)
             return true end }))
-            card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult+0.2*sliced_card.sell_cost}}, colour = G.C.RED, no_juice = true})
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult+0.2*sliced_card.sell_cost}}, colour = G.C.RED, no_juice = true})
 return {calculated = true}
         end
     end
