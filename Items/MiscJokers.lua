@@ -1819,7 +1819,7 @@ local mondrian = {
                 Xmult_mod = card.ability.extra.x_mult
             }
         end
-        if context.end_of_round and not context.blueprint then
+        if context.end_of_round and not context.blueprint and not context.individual and not context.repetition then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
             card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
             return {calculated = true}
@@ -1830,7 +1830,7 @@ local mondrian = {
 local mondrian_sprite = {
     object_type = "Atlas",
     key = "mondrian",
-    path = "j_cry_m.png",
+    path = "j_cry_big_m.png",
     px = 71,
     py = 95
 }
