@@ -48,9 +48,7 @@ local sync_catalyst = {
 	loc_txt = {
         name = 'Sync Catalyst',
         text = {
-			"Balance {C:blue}Chips{} and",
-			"{C:red}Mult{} when this Joker",
-			"is triggered"
+			"Balance {C:chips}Chips{} and {C:mult}Mult{}",
 		}
     },
 	rarity = "cry_epic",
