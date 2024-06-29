@@ -412,7 +412,7 @@ local primus = {
         name = 'Primus',
         text = {
 			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
-			"Ace 2 3 5 7",
+			"wwwwwwqqqq",
 			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
         }
     },
