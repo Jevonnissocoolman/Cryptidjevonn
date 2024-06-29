@@ -194,7 +194,6 @@ local speculo = {
 	atlas = "speculo",
 	soul_pos = {x = 1, y = 0, extra = {x = 2, y = 0}},
 	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
 		info_queue[#info_queue+1] = G.P_CENTERS.e_negative
 	end,
 	calculate = function(self, card, context)
