@@ -428,7 +428,7 @@ local primus = {
 	local check = true
 	if context.scoring_hand then
 		for i = 1, #context.full_hand do
-                        if context.full_hand[i]:get_id() == 4 or 6 or 8 or 9 or 10 or 11 or 12 or 13 then
+                        if context.full_hand[i]:get_id() == 4 or or context.scoring_hand[i]:get_id() == 6 or context.scoring_hand[i]:get_id() == 8 or context.scoring_hand[i]:get_id() == 9 or context.scoring_hand[i]:get_id() == 10 or context.scoring_hand[i]:get_id() == 11 or context.scoring_hand[i]:get_id() == 12 or context.scoring_hand[i]:get_id() == 13 then
                             check = false
                         end
         	end
@@ -457,7 +457,7 @@ local primus = {
 local primus_sprite = {
     object_type = "Atlas",
     key = "primus",
-    path = "j_cry_exponentia.png",
+    path = "j_cry_redeo.png",
     px = 71,
     py = 95
 }	
