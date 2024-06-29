@@ -583,7 +583,7 @@ local chili_pepper = {
             "This Joker gains {X:mult,C:white} X#2# {} Mult",
             "at end of round,",
             "{C:red}self destructs{} after {C:attention}#3#{} rounds",
-	    "{C:inactive}currently{} {X:mult,C:white} X#1# {} {C:inactive}Mult{}"
+	    "{C:inactive}(Currently{} {X:mult,C:white} X#1# {} {C:inactive}Mult){}"
         }
     },
 	rarity = 2,
@@ -1832,7 +1832,7 @@ local mstack = {
             "Retrigger all cards played",
             "once for every {C:attention}2 Jolly Jokers{}",
             "{C:attention}sold{}, up to {C:attention}8 sold{}",
-            "{C:inactive}Currently{}{C:attention:} #1#{}{C:inactive} retriggers #2#{}",
+            "{C:inactive}(Currently{}{C:attention:} #1#{}{C:inactive} retriggers #2#){}",
         }
     },
     rarity = 2,
