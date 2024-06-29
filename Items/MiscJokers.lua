@@ -200,9 +200,9 @@ local wee_fib = {
 		"This Joker gains",
 		"{C:mult}+#2#{} Mult when each played",
 		"{C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{}, or {C:attention}8{}",
-		"is scored"
+		"is scored",
 		"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"}
-    },
+    	},
 	rarity = 3,
 	cost = 12,
 	discovered = true,
