@@ -412,7 +412,7 @@ local primus = {
         name = 'Exponentia',
         text = {
 			"This Joker gains {X:dark_edition,C:white} ^#1# {} Mult",
-			"hand played aldalsk",
+			"if all cards in hand",
 			"{C:inactive}(Currently {X:dark_edition,C:white} ^#2# {C:inactive} Mult)"
         }
     },
@@ -425,11 +425,13 @@ local primus = {
 	soul_pos = {x = 2, y = 0, extra = {x = 1, y = 0}},
 	calculate = function(self, card, context)
 	local primuscheck = true
-	for i = 1, #context.scoring_hand do
+	if context.scoring_hand then
+		for i = 1, #context.scoring_hand do
                         if context.scoring_hand[i]:get_id() == (4 or 6 or 8 or 9 or 10 or 11 or 12 or 13) then
                             primuscheck = false
                         end
-        end
+        	end
+	end
 	if context.cardarea == G.jokers and primuscheck and context.before and not context.blueprint then
 			card.ability.extra.pow_mult = card.ability.extra.pow_mult + card.ability.extra.pow_mult_mod
 	end
