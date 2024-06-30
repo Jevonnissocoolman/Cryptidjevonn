@@ -1845,9 +1845,10 @@ local sapling = {
         text = {
 			"Test1",
 			"Test2",
-			"weewoo"
+			"Weewoo",
+			"#1#"
 		}
-    },
+    	},
 	rarity = 2,
 	cost = 6,
 	discovered = true,
@@ -1857,8 +1858,12 @@ local sapling = {
     	end,
 	atlas = "sapling",
 	calculate = function(self, card, context)
-        	
-		if context.selling_self and not context.blueprint and not context.retrigger_joker then
+        	if context.individual and context.cardarea == G.play and not context.blueprint and not context.retrigger_joker then
+			if context.other_card.ability.effect ~= "Base" then
+				card.ability.extra.score = card.ability.extra.score + 1
+			end
+		end
+		if context.selling_self and card.ability.extra.score >= 30 and not context.blueprint and not context.retrigger_joker then
 			local card = create_card("Joker", G.jokers, nil, 1, nil, nil, nil, "cry_sapling")
                         card:add_to_deck()
                         G.jokers:emplace(card)
