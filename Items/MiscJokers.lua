@@ -2000,8 +2000,8 @@ local fastfoodm = {
 		"{C:red}self destructs{} after {C:attention}#2#{} round#3#,",
 		"Increased by {C:attention}1{} round when",
 		"{C:attention}Jolly Joker{} is {C:attention}sold{}",
-		"{C:inactive,s:0.8}2 McDoubles, 2 McChickens{}"
-		"{C:inactive,s:0.8}Large Fries, 20 Piece{}"
+		"{C:inactive,s:0.8}2 McDoubles, 2 McChickens{}",
+		"{C:inactive,s:0.8}Large Fries, 20 Piece{}",
 		"{C:inactive,s:0.8}& Large Cake{}"
     	},
 	rarity = 1,
