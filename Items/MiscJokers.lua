@@ -2025,12 +2025,10 @@ local foodm = {
         if context.end_of_round and not context.blueprint and not context.individual and not context.repetition and not context.retrigger_joker then
             card.ability.extra.rounds_remaining = card.ability.extra.rounds_remaining - 1
             if card.ability.extra.rounds_remaining > 0 then
-                return {
-                card_eval_status_text(card, 'extra', nil, nil, nil, {
-                    message = "+1 Round",
-                    colour = G.C.FILTER,
-                })
-            	}
+		return {
+                    message = {"-1 Round"},
+                    colour = G.C.FILTER
+                }
             else
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -2057,10 +2055,12 @@ local foodm = {
         end
         if context.selling_card and context.card.ability.name == "Jolly Joker" and not context.blueprint and not context.retrigger_joker then
             card.ability.extra.rounds_remaining = card.ability.extra.rounds_remaining + 1
-            return {
-                    message = {"+1 Round"},
-                    colour = G.C.FILTER
-        	}
+	    return {
+            	    card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    message = "+1 Round",
+                    colour = G.C.FILTER,
+                })
+            }
         end
         if card.ability.extra.rounds_remaining == 1 then
             card.ability.extra.text = ""
