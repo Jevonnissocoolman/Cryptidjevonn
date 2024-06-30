@@ -1839,7 +1839,7 @@ local sapling = {
 	name = "cry-sapling",
 	key = "sapling",
 	pos = {x = 0, y = 0},
-	config = {extra = {score = 0},
+	config = {extra = {score = 0}},
 	loc_txt = {
         name = 'Sapling',
         text = {
