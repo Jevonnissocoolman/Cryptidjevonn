@@ -1843,12 +1843,12 @@ local sapling = {
 	loc_txt = {
         name = 'Sapling',
         text = {
-			"Aftr scoring {C:attention}30 Enchanced{} ",
+			"After scoring {C:attention}30{} Enchanced",
 			"cards, sell this card to",
 			"Create an {C:cry_epic}Epic{} {C:attention}Joker{}",
 			"{C:inactive}(Currently{}{C:attention} #1#{}{C:inactive}/30){}",
-			"{C:inactive,s:0.5}Will create a {C:red,s:0.5}Rare{} {C:attention,s:0.5}Joker{}",
-			"{C:inactive,s:0.5}If {C:cry_epic,s:0.5}Epic{} {C:inactive,s:0.5}Jokers are disabled{}"
+			"{C:inactive,s:0.8}Will create a {C:red,s:0.8}Rare{} {C:attention,s:0.8}Joker{}",
+			"{C:inactive,s:0.8}If {C:cry_epic,s:0.8}Epic{} {C:inactive,s:0.8}Jokers are disabled{}"
 		}
     	},
 	rarity = 2,
@@ -1863,6 +1863,10 @@ local sapling = {
         	if context.individual and context.cardarea == G.play and not context.blueprint and not context.retrigger_joker then
 			if context.other_card.ability.effect ~= "Base" then
 				card.ability.extra.score = card.ability.extra.score + 1
+				if card.ability.extra.score >= 30 then
+					local eval = function(card) return not card.REMOVED end
+					juice_card_until(self, eval, true)
+				end
 			end
 		end
 		if context.selling_self and card.ability.extra.score >= 30 and not context.blueprint and not context.retrigger_joker then
