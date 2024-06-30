@@ -1839,13 +1839,13 @@ local sapling = {
 	name = "cry-sapling",
 	key = "sapling",
 	pos = {x = 0, y = 0},
-	config = {jolly = {t_mult = 8, type = 'Pair'}},
+	config = {extra = {score = 0},
 	loc_txt = {
         name = 'Sapling',
         text = {
-			"Test",
+			"Test1",
 			"Test2",
-			"{C:attention}Jolly Joker{}"
+			"weewoo"
 		}
     },
 	rarity = 2,
@@ -1853,13 +1853,12 @@ local sapling = {
 	discovered = true,
 	blueprint_compat = true,
 	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
+		return {vars = {center.ability.extra.score}}
     	end,
 	atlas = "sapling",
 	calculate = function(self, card, context)
-        	if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
+        	if context.selling_self and not context.blueprint and not context.retrigger_joker then
 			local card = create_card("Joker", G.jokers, nil, 1, nil, nil, nil, "cry_sapling")
-                        card:set_edition({ negative = true })
                         card:add_to_deck()
                         G.jokers:emplace(card)
                         card:start_materialize()
