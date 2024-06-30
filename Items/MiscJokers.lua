@@ -1997,8 +1997,8 @@ local foodm = {
         name = 'Fast Food M',
         text = {
             "{C:mult}+#1#{} Mult",
-            "{C:red}self destructs{} after {C:attention}#2#{} round#3#,",
-            "Increased by {C:attention}1{} round when",
+            "{C:red}self destructs{} in {C:attention}#2#{} round#3#,",
+            "Increase by {C:attention}1{} round when",
             "{C:attention}Jolly Joker{} is {C:attention}sold{}",
             "{C:inactive,s:0.8}2 McDoubles, 2 McChickens{}",
             "{C:inactive,s:0.8}Large Fries, 20 Piece{}",
@@ -2026,9 +2026,11 @@ local foodm = {
             card.ability.extra.rounds_remaining = card.ability.extra.rounds_remaining - 1
             if card.ability.extra.rounds_remaining > 0 then
                 return {
-                    message = {"-1 Round"},
-                    colour = G.C.FILTER
-                }
+                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    message = "+1 Round",
+                    colour = G.C.FILTER,
+                })
+            	}
             else
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -2062,7 +2064,9 @@ local foodm = {
         end
         if card.ability.extra.rounds_remaining == 1 then
             card.ability.extra.text = ""
-        end
+	else
+	    card.ability.extra.text = "s"
+	end
     end
 }
 local foodm_sprite = {
