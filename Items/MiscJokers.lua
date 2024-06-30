@@ -1799,7 +1799,8 @@ local mondrian = {
     name = 'Mondrian',
     text = {
                 "This Joker gains {X:mult,C:white} X#1# {} Mult",
-                "If no {C:attention}discards{} were used this round",
+                "If no {C:attention}discards{}",
+		"were used this round"
                 "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
            }
     },
@@ -1848,7 +1849,7 @@ local sapling = {
 			"Create an {C:cry_epic}Epic{} {C:attention}Joker{}",
 			"{C:inactive}(Currently{}{C:attention} #1#{}{C:inactive}/30){}",
 			"{C:inactive,s:0.8}Will create a {C:red,s:0.8}Rare{} {C:attention,s:0.8}Joker{}",
-			"{C:inactive,s:0.8}If {C:cry_epic,s:0.8}Epic{} {C:inactive,s:0.8}Jokers are disabled{}"
+			"{C:inactive,s:0.8}if {C:cry_epic,s:0.8}Epic{} {C:inactive,s:0.8}Jokers are disabled{}"
 		}
     	},
 	rarity = 2,
