@@ -586,7 +586,7 @@ local chili_pepper = {
         text = {
             "This Joker gains {X:mult,C:white} X#2# {} Mult",
             "at end of round,",
-            "{C:red}self destructs{} after {C:attention}#3#{} rounds",
+            "{C:red,E:2}self destructs{} after {C:attention}#3#{} rounds",
 	    "{C:inactive}(Currently{} {X:mult,C:white} X#1# {} {C:inactive}Mult){}"
         }
     },
@@ -1482,7 +1482,7 @@ local redbloon = {
         name = 'Red Bloon',
         text = {
             "Earn {C:money}$#1#{} in {C:attention}#2#{} round#3#",
-            "{C:red}self destructs{}"
+            "{C:red,E:2}self destructs{}"
         }
     },
     rarity = 1,
@@ -1844,9 +1844,11 @@ local sapling = {
         name = 'Sapling',
         text = {
 			"Aftr scoring {C:attention}30 Enchanced{} ",
-			"cards, sell this card to create",
-			"an {C:cry_epic}Epic{} {C:attention}Joker{}",
-			"{C:inactive}(Currently{}{C:attention}#1#{}{C:inactive}/30){}"
+			"cards, sell this card to",
+			"Create an {C:cry_epic}Epic{} {C:attention}Joker{}",
+			"{C:inactive}(Currently{}{C:attention} #1#{}{C:inactive}/30){}",
+			"{C:inactive,s:0.5}Will create a {C:red,s:0.5}Rare{} {C:attention,s:0.5}Joker{}",
+			"{C:inactive,s:0.5}If {C:cry_epic,s:0.5}Epic{} {C:inactive,s:0.5}Jokers are disabled{}"
 		}
     	},
 	rarity = 2,
@@ -1972,7 +1974,7 @@ local bubblem = {
     	"Create a {C:dark_edition}Foil {C:attention}Jolly Joker{}",
     	"if hand played contains",
     	"a {C:attention}Four of a Kind{}", --todo: localize this
-    	"{C:red}self destructs{}",
+    	"{C:red,E:2}self destructs{}",
     	}
     },
     rarity = 1,
@@ -2042,7 +2044,7 @@ local foodm = {
         name = 'Fast Food M',
         text = {
             "{C:mult}+#1#{} Mult",
-            "{C:red}self destructs{} in {C:attention}#2#{} round#3#,",
+            "{C:red,E:2}self destructs{} in {C:attention}#2#{} round#3#,",
             "Increase by {C:attention}1{} round when",
             "{C:attention}Jolly Joker{} is {C:attention}sold{}",
             "{C:inactive,s:0.8}2 McDoubles, 2 McChickens{}",
