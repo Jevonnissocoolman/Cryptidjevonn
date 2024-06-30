@@ -1843,10 +1843,10 @@ local sapling = {
 	loc_txt = {
         name = 'Sapling',
         text = {
-			"Test1",
-			"Test2",
-			"Weewoo",
-			"#1#"
+			"Aftr scoring {C:attention}30 Enchanced{} ",
+			"cards, sell this card to create",
+			"an {C:cry_epic}Epic{} {C:attention}Joker{}",
+			"{C:inactive}(Currently{}{C:attention}#1#{}{C:inactive}/30){}"
 		}
     	},
 	rarity = 2,
@@ -1875,7 +1875,7 @@ local sapling = {
 local sapling_sprite = {
 	object_type = "Atlas",
     key = "sapling",
-    path = "j_cry_big_m.png",
+    path = "j_cry_sapling.png",
     px = 71,
     py = 95
 }
