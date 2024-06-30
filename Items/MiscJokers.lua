@@ -1857,7 +1857,8 @@ local sapling = {
     	end,
 	atlas = "sapling",
 	calculate = function(self, card, context)
-        	if context.selling_self and not context.blueprint and not context.retrigger_joker then
+        	
+		if context.selling_self and not context.blueprint and not context.retrigger_joker then
 			local card = create_card("Joker", G.jokers, nil, 1, nil, nil, nil, "cry_sapling")
                         card:add_to_deck()
                         G.jokers:emplace(card)
