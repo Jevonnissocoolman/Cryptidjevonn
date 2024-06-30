@@ -1800,7 +1800,7 @@ local mondrian = {
     text = {
                 "This Joker gains {X:mult,C:white} X#1# {} Mult",
                 "If no {C:attention}discards{}",
-		"were used this round"
+		"were used this round",
                 "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
            }
     },
