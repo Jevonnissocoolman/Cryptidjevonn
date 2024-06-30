@@ -1714,7 +1714,7 @@ local monkey_dagger = {
             G.GAME.joker_buffer = G.GAME.joker_buffer - 1
             G.E_MANAGER:add_event(Event({func = function()
                 G.GAME.joker_buffer = 0
-                card.ability.extra.chips = card.ability.extra.chips + sliced_card.sell_cost*5
+                card.ability.extra.chips = card.ability.extra.chips + sliced_card.sell_cost*4
                 card:juice_up(0.8, 0.8)
                 sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
                 play_sound('slice1', 0.96+math.random()*0.08)
@@ -1772,12 +1772,12 @@ local pirate_dagger = {
             G.GAME.joker_buffer = G.GAME.joker_buffer - 1
             G.E_MANAGER:add_event(Event({func = function()
                 G.GAME.joker_buffer = 0
-                card.ability.extra.Xchips = card.ability.extra.Xchips + sliced_card.sell_cost*0.5
+                card.ability.extra.Xchips = card.ability.extra.Xchips + sliced_card.sell_cost*0.25
                 card:juice_up(0.8, 0.8)
                 sliced_card:start_dissolve({HEX("57ecab")}, nil, 1.6)
                 play_sound('slice1', 0.96+math.random()*0.08)
             return true end }))
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xchips', vars = {card.ability.extra.Xchips+0.5*sliced_card.sell_cost}}, colour = G.C.CHIPS, no_juice = true})
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xchips', vars = {card.ability.extra.Xchips+0.25*sliced_card.sell_cost}}, colour = G.C.CHIPS, no_juice = true})
 			return {calculated = true}
         end
     end
