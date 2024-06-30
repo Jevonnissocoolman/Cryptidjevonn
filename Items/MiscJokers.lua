@@ -1844,20 +1844,21 @@ local sapling = {
         name = 'Sapling',
         text = {
 			"Test",
-			"create a {C:dark_edition}Negative{}",
+			"Test2",
 			"{C:attention}Jolly Joker{}"
 		}
     },
 	rarity = 2,
 	cost = 6,
 	discovered = true,
-	blueprint_compat = true,loc_vars = function(self, info_queue, center)
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
     	end,
 	atlas = "sapling",
 	calculate = function(self, card, context)
         	if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
-			local card = create_card("Joker", G.jokers, nil, 0.99, nil, nil, nil, "cry_sapling")
+			local card = create_card("Joker", G.jokers, nil, 1, nil, nil, nil, "cry_sapling")
                         card:set_edition({ negative = true })
                         card:add_to_deck()
                         G.jokers:emplace(card)
