@@ -1834,6 +1834,45 @@ local mondrian_sprite = {
     px = 71,
     py = 95
 }
+local sapling = {
+	object_type = "Joker",
+	name = "cry-sapling",
+	key = "sapling",
+	pos = {x = 0, y = 0},
+	config = {jolly = {t_mult = 8, type = 'Pair'}},
+	loc_txt = {
+        name = 'Sapling',
+        text = {
+			"Test",
+			"create a {C:dark_edition}Negative{}",
+			"{C:attention}Jolly Joker{}"
+		}
+    },
+	rarity = 2,
+	cost = 6,
+	discovered = true,
+	blueprint_compat = true,loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
+    	end,
+	atlas = "sapling",
+	calculate = function(self, card, context)
+        	if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
+			local card = create_card("Joker", G.jokers, nil, 0.99, nil, nil, nil, "cry_sapling")
+                        card:set_edition({ negative = true })
+                        card:add_to_deck()
+                        G.jokers:emplace(card)
+                        card:start_materialize()
+			return {completed=true}
+		end
+	end
+}
+local sapling_sprite = {
+	object_type = "Atlas",
+    key = "sapling",
+    path = "j_cry_big_m.png",
+    px = 71,
+    py = 95
+}
 local jollysus = {
     object_type = "Joker",
     name = "cry-jollysus",
@@ -2228,4 +2267,4 @@ return {name = "Misc. Jokers",
             end
 
         end,
-        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, jollysus, bubblem, foodm, mstack,}}
+        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, sapling_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, sapling, jollysus, bubblem, foodm, mstack,}}
