@@ -153,7 +153,7 @@ local queensgambit = {
         }
     },
     rarity = 3,
-    cost = 10,
+    cost = 7,
     discovered = true,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -2055,8 +2055,10 @@ local foodm = {
         end
         if context.selling_card and context.card.ability.name == "Jolly Joker" and not context.blueprint and not context.retrigger_joker then
             card.ability.extra.rounds_remaining = card.ability.extra.rounds_remaining + 1
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_rounds_remaining', vars = {card.ability.extra.rounds_remaining}}})
-            return {calculated = true}
+            return {
+                    message = {"+1 Round"},
+                    colour = G.C.FILTER
+        	}
         end
         if card.ability.extra.rounds_remaining == 1 then
             card.ability.extra.text = ""
