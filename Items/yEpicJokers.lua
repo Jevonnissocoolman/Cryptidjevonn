@@ -334,19 +334,22 @@ local doodlem = {
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
-                        	return {message = "+1 Tarot"}
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+                        	return {completed=true}
                 	elseif consumeable == 2 then
                     		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
-                        	return {message = "+1 Planet"}
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+                        	return {completed=true}
                 	elseif consumeable == 3 then
                     		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
-                        	return {message = "+1 Spectral"}
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                        	return {completed=true}
                 	end
             end
         end
