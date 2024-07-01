@@ -2211,7 +2211,7 @@ local mneon = {
             "Earn {C:money}$#2#{} at end of round",
             "Increase payout by {C:money}$#1#{} for",
 	    "each {C:attention}Jolly Joker{} at end of round",
-	    "{C:inactive}(Max of {C:money}$20{}{C:inactive}){}"
+	    "{C:inactive}(Max of {C:money}$30{}{C:inactive}){}"
         }
     },
     rarity = 2,
@@ -2229,18 +2229,13 @@ local mneon = {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
             end
-		if jollycount > 0 and card.ability.extra.money < 20 then
+		if jollycount > 0 and card.ability.extra.money < 30 then
             		card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus * jollycount
-			return {
-                		card_eval_status_text(card, 'extra', nil, nil, nil, {
-                    		message = "M!",
-                    		colour = G.C.FILTER,
-                		})
-            		}
+			return {message = "M!"}
 		end
         end
-	if card.ability.extra.money > 20 then
-			card.ability.extra.money = 20
+	if card.ability.extra.money > 30 then
+			card.ability.extra.money = 30
 	end
     end,
     calc_dollar_bonus = function(self, card)
