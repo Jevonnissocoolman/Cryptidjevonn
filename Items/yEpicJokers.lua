@@ -315,7 +315,7 @@ local doodlem = {
             "Create a {C:dark_edition}Negative{} {C:attention}consumable{}",
             "for each {C:attention}Jolly Joker{}",
             "when {C:attention}Blind{} is selected",
-	    "{C:inactive}(Min 1){}"
+	    "{C:inactive}(Min of 1){}"
         }
     },
     rarity = "cry_epic",
@@ -382,6 +382,7 @@ local doodlem = {
         end
     end
 }
+--Notes: I've had visual issues when playing with this joker. Dunno what's up with that
 local doodlem_sprite = {
 	object_type = "Atlas",
     key = "doodlem",
