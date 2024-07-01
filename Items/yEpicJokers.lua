@@ -357,7 +357,27 @@ local doodlem = {
 		end
 		return true
 	    else
-		return {message = "M!"}
+		local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
+                	if consumeable == 1 then
+                        	local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+                	elseif consumeable == 2 then
+                    		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+                	elseif consumeable == 3 then
+                    		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                	end
+		return true
 	    end
         end
     end
