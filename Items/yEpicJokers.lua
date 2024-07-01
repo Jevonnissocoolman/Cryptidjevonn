@@ -303,85 +303,61 @@ local M_sprite = {
     py = 95
 }
 local doodlem = {
-	object_type = "Joker",
-	name = "cry-doodlem",
-	key = "doodlem",
-	config = {extra = {odds = 4}},
-	pos = {x = 0, y = 0},
-	loc_txt = {
+    object_type = "Joker",
+    name = "cry-doodlem",
+    key = "doodlem",
+    atlas = "doodlem",
+    config = {extra = {odds = 4}},
+    pos = {x = 0, y = 0},
+    loc_txt = {
         name = 'Doodle M',
         text = {
             "{C:green}#1# in #2#{} chance for",
             "each {C:attention}Jolly Joker{} to",
-	    "create a {C:dark_edition}Negative{} {C:attention}consumable{}"
-		}
-    	},
-    	end,
-	rarity = "cry_epic",
-	cost = 11,
-	discovered = true,
-	blueprint_compat = true,
-        loc_vars = function(self, info_queue, center)
-		return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
-	end,
-	calculate = function(self, card, context)
-        	if context.other_joker and context.other_joker.ability.name == "Jolly Joker" then
-			if pseudorandom('cry_doodlem') < G.GAME.probabilities.normal/card.ability.extra.odds then
-				local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
-                    		if consumeable == 1 then
-                        		G.E_MANAGER:add_event(Event({
-                            		func = (function()
-                                		G.E_MANAGER:add_event(Event({
-                                    		func = function() 
-                                        		local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, 'm')
-							card:set_edition({negative = true})
-                                        		card:add_to_deck()
-                                        		G.consumeables:emplace(card)
-                                        		return true
-                                    		end}))   
-                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})                       
-                                		return true
-                            		end)}))
-                    		end
-                   		if consumeable == 2 then
-                        		G.E_MANAGER:add_event(Event({
-                            		func = (function()
-                                		G.E_MANAGER:add_event(Event({
-                                    		func = function() 
-                                        		local card = create_card('Planet',G.consumeables, nil, nil, nil, nil, nil, 'm')
-							card:set_edition({negative = true})					
-                                        		card:add_to_deck()
-                                        		G.consumeables:emplace(card)				
-                                        		return true
-                                    		end}))   
-                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})                       
-                                		return true
-                            		end)}))
-                    		end
-				if consumeable == 3 then
-					G.E_MANAGER:add_event(Event({
-                            		func = (function()
-                                		G.E_MANAGER:add_event(Event({
-                                    		func = function() 
-                                        		local card = create_card('Spectral',G.consumeables, nil, nil, nil, nil, nil, 'm')
-							card:set_edition({negative = true})					
-                                        		card:add_to_deck()
-                                        		G.consumeables:emplace(card)				
-                                        		return true
-                                    		end}))   
-                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})                       
-                                		return true
-                            		end)}))
-				end
-			end
-        	end
-	end,
-	atlas = "doodlem",
+            "create a {C:dark_edition}Negative{} {C:attention}consumable{}"
+        }
+    },
+    rarity = "cry_epic",
+    cost = 11,
+    discovered = true,
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
+    end,
+    calculate = function(self, card, context)
+        if context.other_joker and context.other_joker.ability.name == "Jolly Joker" then
+            if pseudorandom('cry_doodlem') < G.GAME.probabilities.normal/card.ability.extra.odds then
+                local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
+                	if consumeable == 1 then
+                        	local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+                        	return {completed=true}
+                	elseif consumeable == 2 then
+                    		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+                        	return {completed=true}
+                	elseif consumeable == 3 then
+                    		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                        	return {completed=true}
+                	end
+            end
+        end
+    end
 }
 local doodlem_sprite = {
 	object_type = "Atlas",
     key = "doodlem",
-    path = "j_cry_meon.png",
+    path = "j_cry_mneon.png",
     px = 71,
     py = 95
 }
