@@ -307,7 +307,7 @@ local doodlem = {
     name = "cry-doodlem",
     key = "doodlem",
     atlas = "doodlem",
-    config = {extra = {odds = 4}},
+    config = {extra = {odds = 4}, jolly = {t_mult = 8, type = 'Pair'}},
     pos = {x = 0, y = 0},
     loc_txt = {
         name = 'Doodle M',
@@ -322,6 +322,7 @@ local doodlem = {
     discovered = true,
     blueprint_compat = true,
     loc_vars = function(self, info_queue, center)
+	info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
 	info_queue[#info_queue+1] = G.P_CENTERS.e_negative --replace this with the consumable one later
         return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
     end,
