@@ -2182,13 +2182,12 @@ local mneon = {
 			end
             card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus*jollycount
             return {calculated = true}
-        end,
-	calc_dollar_bonus = function(self, card)
+    end,
+    	calc_dollar_bonus = function(self, card)
 		if card.ability.extra.money > 0 then
 			return card.ability.extra.money
 		end
 	end
-    end
 }
 local mneon_sprite = {
     object_type = "Atlas",
