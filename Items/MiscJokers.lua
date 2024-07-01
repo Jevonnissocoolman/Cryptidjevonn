@@ -1822,8 +1822,10 @@ local mondrian = {
         end
         if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint and not context.individual and not context.repetition then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
-            return {calculated = true}
+            return {
+                    	message = localize('k_upgrade_ex'),
+                        card = card,
+			}
         end
     end
 }
