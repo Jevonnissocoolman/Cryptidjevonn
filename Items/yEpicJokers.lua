@@ -312,9 +312,9 @@ local doodlem = {
     loc_txt = {
         name = 'Doodle M',
         text = {
-            "{C:green}#1# in #2#{} chance for",
-            "each {C:attention}Jolly Joker{} to",
-            "create a {C:dark_edition}Negative{} {C:attention}consumable{}"
+            "{C:green}#1# in #2#{} chance for each",
+            "{C:attention}Jolly Joker{} to create",
+            "a {C:dark_edition}Negative{} {C:attention}consumable{}"
         }
     },
     rarity = "cry_epic",
@@ -322,6 +322,7 @@ local doodlem = {
     discovered = true,
     blueprint_compat = true,
     loc_vars = function(self, info_queue, center)
+	info_queue[#info_queue+1] = G.P_CENTERS.e_negative --replace this with the consumable one later
         return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
     end,
     calculate = function(self, card, context)
