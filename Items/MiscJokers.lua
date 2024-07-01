@@ -2221,7 +2221,7 @@ local mneon = {
     perishable_compat = false,
     blueprint_compat = false,
     loc_vars = function(self, info_queue, center)
-	info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {card.config.jolly.t_mult, card.config.jolly.type} }
+	info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
         return {vars = {center.ability.extra.bonus, center.ability.extra.money}}
     end,
     atlas = "mneon",
