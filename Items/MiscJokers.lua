@@ -1789,6 +1789,52 @@ local pirate_dagger_sprite = {
     px = 71,
     py = 95
 }
+local mondrian = {
+    object_type = "Joker",
+    name = "cry-mondrian",
+    key = "mondrian",
+    pos = {x = 0, y = 0},
+    config = {extra = {extra = 0.25, x_mult = 1}},
+    loc_txt = {
+    name = 'Mondrian',
+    text = {
+                "This Joker gains {X:mult,C:white} X#1# {} Mult",
+                "If no {C:attention}discards{}",
+		"were used this round",
+                "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
+           }
+    },
+    rarity = 2,
+    cost = 7,
+    discovered = true,
+    perishable_compat = false,
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.extra, center.ability.extra.x_mult}}
+    end,
+    atlas = "mondrian",
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and (card.ability.extra.x_mult > 1) and not context.before and not context.after then
+            return {
+                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+                Xmult_mod = card.ability.extra.x_mult
+            }
+        end
+        if context.end_of_round and G.GAME.current_round.discards_used == 0 and not context.blueprint and not context.individual and not context.repetition then
+            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.extra
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}})
+            return {calculated = true}
+        end
+    end
+}
+
+local mondrian_sprite = {
+    object_type = "Atlas",
+    key = "mondrian",
+    path = "j_cry_mondrian.png",
+    px = 71,
+    py = 95
+}
 local sapling = {
 	object_type = "Joker",
 	name = "cry-sapling",
@@ -2145,55 +2191,11 @@ local mstack = {
         end
     end,
 }
+
 local mstack_sprite = {
     object_type = "Atlas",
     key = "mstack",
     path = "j_cry_mstack.png",
-    px = 71,
-    py = 95
-}
-local mneon = {
-    object_type = "Joker",
-    name = "cry-mneon",
-    key = "mneon",
-    pos = {x = 0, y = 0},
-    config = {extra = {bonus = 1, money = 2}},
-    loc_txt = {
-        name = 'Neon M',
-        text = {
-            "jajajajajaja",
-            "#2# hehehehehe #1#"
-        }
-    },
-    rarity = 2,
-    cost = 7,
-    discovered = true,
-    perishable_compat = false,
-    blueprint_compat = true,
-    loc_vars = function(self, info_queue, center)
-        return {vars = {center.ability.extra.bonus, center.ability.extra.money}}
-    end,
-    atlas = "mneon",
-    calculate = function(self, card, context)
-        if context.end_of_round and not context.blueprint and not context.individual and not context.repetition then
-            local jollycount = 0
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].ability.name == 'j_jolly' then jollycount = jollycount + 1 end
-            end
-            card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus * jollycount
-            return {calculated = true}
-        end
-    end,
-    calc_dollar_bonus = function(self, card)
-        if card.ability.extra.money > 0 then
-            return card.ability.extra.money
-        end
-    end
-}
-local mneon_sprite = {
-    object_type = "Atlas",
-    key = "mneon",
-    path = "j_cry_m.png",
     px = 71,
     py = 95
 }
@@ -2278,4 +2280,4 @@ return {name = "Misc. Jokers",
             end
 
         end,
-        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, sapling_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, mneon_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, sapling, jollysus, bubblem, foodm, mstack, mneon,}}
+        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, sapling_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, sapling, jollysus, bubblem, foodm, mstack,}}
