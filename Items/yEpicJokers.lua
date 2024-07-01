@@ -338,11 +338,11 @@ local doodlem = {
                         	return {completed=true}
                 	elseif consumeable == 2 then
 				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-                        	return {completed=true}
                     		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
+			        return {completed=true}
                 	elseif consumeable == 3 then
 				card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
                     		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
