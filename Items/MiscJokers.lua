@@ -2208,8 +2208,10 @@ local mneon = {
     loc_txt = {
         name = 'Neon M',
         text = {
-            "jajajajajaja",
-            "#2# hehehehehe #1#"
+            "Earn {C:money}$#2#{} at end of round",
+            "Increase payout by {C:money}$#1#{} for",
+	    "each {C:attention}Jolly Joker{} at end of round"
+	    "{C:inactive}(Max of {C:money}$20{}{C:inactive}){}
         }
     },
     rarity = 2,
@@ -2227,7 +2229,7 @@ local mneon = {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
             end
-		if jollycount > 0 then
+		if jollycount > 0 and card.ability.extra.money < 20 then
             		card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus * jollycount
 			return {
                 		card_eval_status_text(card, 'extra', nil, nil, nil, {
@@ -2237,6 +2239,9 @@ local mneon = {
             		}
 		end
         end
+	if card.ability.extra.money > 20 then
+			card.ability.extra.money = 20
+	end
     end,
     calc_dollar_bonus = function(self, card)
         if card.ability.extra.money > 0 then
@@ -2247,7 +2252,7 @@ local mneon = {
 local mneon_sprite = {
     object_type = "Atlas",
     key = "mneon",
-    path = "j_cry_m.png",
+    path = "j_cry_mneon.png",
     px = 71,
     py = 95
 }
