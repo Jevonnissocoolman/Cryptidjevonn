@@ -2210,7 +2210,7 @@ local mneon = {
         text = {
             "Earn {C:money}$#2#{} at end of round",
             "Increase payout by {C:money}$#1#{} for",
-	    "each {C:attention}Jolly Joker{} at end of round"
+	    "each {C:attention}Jolly Joker{} at end of round",
 	    "{C:inactive}(Max of {C:money}$20{}{C:inactive}){}
         }
     },
