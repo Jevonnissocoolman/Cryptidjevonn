@@ -312,7 +312,7 @@ local doodlem = {
         name = 'Doodle M',
         text = {
             "{C:green}#1# in #2#{} chance for",
-            "each {C:attention}Jolly Joker{} to"
+            "each {C:attention}Jolly Joker{} to",
 	    "create a {C:dark_edition}Negative{} {C:attention}consumable{}"
 		}
     	},
