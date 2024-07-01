@@ -352,7 +352,7 @@ local doodlem = {
                         	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
                         	return {completed=true}
                 	end
-            end
+            else return {calculated = true} end
         end
     end
 }
