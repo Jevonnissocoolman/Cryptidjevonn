@@ -2225,10 +2225,17 @@ local mneon = {
         if context.end_of_round and not context.blueprint and not context.individual and not context.repetition then
             local jollycount = 0
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].ability.name == 'j_jolly' then jollycount = jollycount + 1 end
+                if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
             end
-            card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus * jollycount
-            return {calculated = true}
+		if jollycount > 0 then
+            		card.ability.extra.money = card.ability.extra.money + card.ability.extra.bonus * jollycount
+			return {
+                		card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    		message = "M!",
+                    		colour = G.C.FILTER,
+                		})
+            		}
+		end
         end
     end,
     calc_dollar_bonus = function(self, card)
