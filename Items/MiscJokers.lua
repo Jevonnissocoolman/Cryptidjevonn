@@ -2204,7 +2204,7 @@ local mneon = {
     name = "cry-mneon",
     key = "mneon",
     pos = {x = 0, y = 0},
-    config = {extra = {bonus = 1, money = 2}},
+    config = {extra = {bonus = 1, money = 2}, jolly = {t_mult = 8, type = 'Pair'}},
     loc_txt = {
         name = 'Neon M',
         text = {
@@ -2221,7 +2221,7 @@ local mneon = {
     perishable_compat = false,
     blueprint_compat = false,
     loc_vars = function(self, info_queue, center)
-	info_queue[#info_queue+1] = {key = "j_jolly", set = "Joker"}
+	info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {center.config.jolly.t_mult, center.config.jolly.type} }
         return {vars = {center.ability.extra.bonus, center.ability.extra.money}}
     end,
     atlas = "mneon",
