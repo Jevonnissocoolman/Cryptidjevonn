@@ -2209,8 +2209,9 @@ local mneon = {
         name = 'Neon M',
         text = {
             "Earn {C:money}$#2#{} at end of round",
-            "Increase payout by {C:money}$#1#{} for",
-	    "each {C:attention}Jolly Joker{} at end of round",
+            "Increase payout by {C:money}$#1#{}",
+	    "for each {C:attention}Jolly Joker{}",
+	    "at end of round",
 	    "{C:inactive}(Max of {C:money}$30{}{C:inactive}){}"
         }
     },
@@ -2218,8 +2219,9 @@ local mneon = {
     cost = 7,
     discovered = true,
     perishable_compat = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     loc_vars = function(self, info_queue, center)
+	info_queue[#info_queue+1] = {key = "j_jolly", set = "Joker"}
         return {vars = {center.ability.extra.bonus, center.ability.extra.money}}
     end,
     atlas = "mneon",
