@@ -314,7 +314,7 @@ local doodlem = {
         text = {
             "Create a {C:dark_edition}Negative{} {C:attention}consumable{}",
             "for each {C:attention}Jolly Joker{}",
-            "at end of round",
+            "when {C:attention}Blind{} is selected",
 	    "{C:inactive}(Min 1){}"
         }
     },
@@ -341,47 +341,23 @@ local doodlem = {
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
 				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
-                        	return {completed=true}
                 	elseif consumeable == 2 then
                     		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
                         	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-                        	return {completed=true}
                 	elseif consumeable == 3 then
                     		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
                         	card:add_to_deck()
                         	G.consumeables:emplace(card)
                         	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
-                        	return {completed=true}
                 	end
 		end
+		return true
 	    else
-		local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
-                	if consumeable == 1 then
-                        	local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'm')
-                        	card:set_edition({negative = true})
-                        	card:add_to_deck()
-                        	G.consumeables:emplace(card)
-				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
-                        	return {completed=true}
-                	elseif consumeable == 2 then
-                    		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
-                        	card:set_edition({negative = true})
-                        	card:add_to_deck()
-                        	G.consumeables:emplace(card)
-                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-                        	return {completed=true}
-                	elseif consumeable == 3 then
-                    		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
-                        	card:set_edition({negative = true})
-                        	card:add_to_deck()
-                        	G.consumeables:emplace(card)
-                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
-                        	return {completed=true}
-                	end
+		return {message = "M!"}
 	    end
         end
     end
