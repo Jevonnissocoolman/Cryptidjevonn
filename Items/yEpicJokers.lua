@@ -302,6 +302,89 @@ local M_sprite = {
     px = 71,
     py = 95
 }
+local doodlem = {
+	object_type = "Joker",
+	name = "cry-doodlem",
+	key = "doodlem",
+	config = {extra = {odds = 4}},
+	pos = {x = 0, y = 0},
+	loc_txt = {
+        name = 'Doodle M',
+        text = {
+            "{C:green}#1# in #2#{} chance for",
+            "each {C:attention}Jolly Joker{} to"
+	    "create a {C:dark_edition}Negative{} {C:attention}consumable{}"
+		}
+    	},
+    	end,
+	rarity = "cry_epic",
+	cost = 11,
+	discovered = true,
+	blueprint_compat = true,
+        loc_vars = function(self, info_queue, center)
+		return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
+	end,
+	calculate = function(self, card, context)
+        	if context.other_joker and context.other_joker.ability.name == "Jolly Joker" then
+			if pseudorandom('cry_doodlem') < G.GAME.probabilities.normal/card.ability.extra.odds then
+				local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
+                    		if consumeable == 1 then
+                        		G.E_MANAGER:add_event(Event({
+                            		func = (function()
+                                		G.E_MANAGER:add_event(Event({
+                                    		func = function() 
+                                        		local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, 'm')
+							card:set_edition({negative = true})
+                                        		card:add_to_deck()
+                                        		G.consumeables:emplace(card)
+                                        		return true
+                                    		end}))   
+                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})                       
+                                		return true
+                            		end)}))
+                    		end
+                   		if consumeable == 2 then
+                        		G.E_MANAGER:add_event(Event({
+                            		func = (function()
+                                		G.E_MANAGER:add_event(Event({
+                                    		func = function() 
+                                        		local card = create_card('Planet',G.consumeables, nil, nil, nil, nil, nil, 'm')
+							card:set_edition({negative = true})					
+                                        		card:add_to_deck()
+                                        		G.consumeables:emplace(card)				
+                                        		return true
+                                    		end}))   
+                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})                       
+                                		return true
+                            		end)}))
+                    		end
+				if consumeable == 3 then
+					G.E_MANAGER:add_event(Event({
+                            		func = (function()
+                                		G.E_MANAGER:add_event(Event({
+                                    		func = function() 
+                                        		local card = create_card('Spectral',G.consumeables, nil, nil, nil, nil, nil, 'm')
+							card:set_edition({negative = true})					
+                                        		card:add_to_deck()
+                                        		G.consumeables:emplace(card)				
+                                        		return true
+                                    		end}))   
+                                    		card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})                       
+                                		return true
+                            		end)}))
+				end
+			end
+        	end
+	end,
+	atlas = "doodlem",
+}
+local doodlem_sprite = {
+	object_type = "Atlas",
+    key = "doodlem",
+    path = "j_cry_meon.png",
+    px = 71,
+    py = 95
+}
 local boredom = {
 	object_type = "Joker",
 	name = "cry-Boredom",
@@ -935,8 +1018,7 @@ local curse_sprite = {
     py = 95
 }
 
-
-G.P_JOKER_RARITY_POOLS["cry_epic"] = {googol_play, sync_catalyst, negative, canvas, error_joker, M, m, boredom, double_scale, number_blocks, oldcandy, caramel, curse}
+G.P_JOKER_RARITY_POOLS["cry_epic"] = {googol_play, sync_catalyst, negative, canvas, error_joker, M, m, doodlem, boredom, double_scale, number_blocks, oldcandy, caramel, curse}
 
 
 return {name = "Epic Jokers", 
@@ -1026,4 +1108,4 @@ return {name = "Epic Jokers",
                 loc_txt = {}
             })
 		end,
-		items = {googol_play_sprite, sync_catalyst_sprite, negative_sprite, canvas_sprite, error_sprite, M_sprite, m_sprite, boredom_sprite, double_scale_sprite, number_blocks_sprite, oldcandy_sprite, caramel_sprite, curse_sprite, googol_play, sync_catalyst, negative, canvas, error_joker, M, m, boredom, double_scale, number_blocks, oldcandy, caramel, curse}}
+		items = {googol_play_sprite, sync_catalyst_sprite, negative_sprite, canvas_sprite, error_sprite, M_sprite, m_sprite, doodlem_sprite, boredom_sprite, double_scale_sprite, number_blocks_sprite, oldcandy_sprite, caramel_sprite, curse_sprite, googol_play, sync_catalyst, negative, canvas, error_joker, M, m, doodlem, boredom, double_scale, number_blocks, oldcandy, caramel, curse}}
