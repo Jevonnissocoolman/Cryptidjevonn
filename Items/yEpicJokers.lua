@@ -307,14 +307,15 @@ local doodlem = {
     name = "cry-doodlem",
     key = "doodlem",
     atlas = "doodlem",
-    config = {extra = {odds = 4}, jolly = {t_mult = 8, type = 'Pair'}},
+    config = {jolly = {t_mult = 8, type = 'Pair'}},
     pos = {x = 0, y = 0},
     loc_txt = {
         name = 'Doodle M',
         text = {
-            "{C:green}#1# in #2#{} chance for each",
-            "{C:attention}Jolly Joker{} to create",
-            "a {C:dark_edition}Negative{} {C:attention}consumable{}"
+            "Create a {C:dark_edition}Negative{} {C:attention}consumable{}",
+            "for each {C:attention}Jolly Joker{}",
+            "at end of round",
+	    "{C:inactive}(Min 1){}"
         }
     },
     rarity = "cry_epic",
@@ -324,12 +325,16 @@ local doodlem = {
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
 	info_queue[#info_queue+1] = G.P_CENTERS.e_negative --replace this with the consumable one later
-        return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
     end,
     calculate = function(self, card, context)
-        if context.other_joker and context.other_joker.ability.name == "Jolly Joker" then
-            if pseudorandom('cry_doodlem') < G.GAME.probabilities.normal/card.ability.extra.odds then
-                local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
+        if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
+	    local jollycount = 0
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
+            end
+            if jollycount > 0 then
+		for i = 1, jollycount do
+                	local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
                 	if consumeable == 1 then
                         	local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'm')
                         	card:set_edition({negative = true})
@@ -352,7 +357,32 @@ local doodlem = {
                         	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
                         	return {completed=true}
                 	end
-            else return {calculated = true} end
+		end
+	    else
+		local consumeable = pseudorandom_element({1, 2, 3}, pseudoseed('doodlem'))
+                	if consumeable == 1 then
+                        	local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+				card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+                        	return {completed=true}
+                	elseif consumeable == 2 then
+                    		local card = create_card('Planet', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+                        	return {completed=true}
+                	elseif consumeable == 3 then
+                    		local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, nil, 'm')
+                        	card:set_edition({negative = true})
+                        	card:add_to_deck()
+                        	G.consumeables:emplace(card)
+                        	card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                        	return {completed=true}
+                	end
+	    end
         end
     end
 }
