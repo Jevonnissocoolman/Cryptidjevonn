@@ -2255,6 +2255,48 @@ local mneon_sprite = {
     px = 71,
     py = 95
 }
+local notebook = {
+    object_type = "Joker",
+    name = "cry-notebook",
+    key = "notebook",
+    pos = {x = 0, y = 0},
+    config = {extra = {odds = 10}, jolly = {t_mult = 8, type = 'Pair'}},
+    loc_txt = {
+    name = 'Notebook',
+    text = {
+    	"{C:attention}Jolly Joker{}",
+    	"{C:green}#1#",
+    	}
+    },
+    rarity = 3,
+    cost = 7,
+    discovered = true,
+    perishable_compat = false,
+    loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
+	return {vars = {center.ability.extra.odds}}
+    end,
+    atlas = "notebook",
+    calculate = function(self, card, context)
+    	    local jollycount = 0
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i].ability.name == 'Jolly Joker' then 
+			jollycount = jollycount + 1
+			card.ability.extra.odds = card.ability.extra.odds - jollycount
+		end
+            end
+    end
+    calc_dollar_bonus = function(self, card)
+            return card.ability.extra.odds
+    end
+}
+local notebook_sprite = {
+    object_type = "Atlas",
+    key = "notebook",
+    path = "j_cry_caramel.png",
+    px = 71,
+    py = 95
+}
 return {name = "Misc. Jokers", 
         init = function()
             --Dropshot Patches
@@ -2336,4 +2378,4 @@ return {name = "Misc. Jokers",
             end
 
         end,
-        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, sapling_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, mneon_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, sapling, jollysus, bubblem, foodm, mstack, mneon,}}
+        items = {dropshot_sprite, maximized_sprite, potofjokes_sprite, queensgambit_sprite, whip_sprite, lucky_joker_sprite, cursor_sprite, pickle_sprite, cube_sprite, triplet_rhythm_sprite, booster_sprite, chili_pepper_sprite, compound_interest_sprite, big_cube_sprite, eternalflame_sprite, nice_sprite, sus_sprite, chad_sprite, waluigi_sprite, seal_the_deal_sprite, jimball_sprite, fspinner_sprite, krustytheclown_sprite, blurred_sprite, gardenfork_sprite, lightupthenight_sprite, nosound_sprite, antennastoheaven_sprite, hunger_sprite, weegaming_sprite, redbloon_sprite, apjoker_sprite, maze_sprite, unjust_dagger_sprite, monkey_dagger_sprite, pirate_dagger_sprite, mondrian_sprite, sapling_sprite, jollysus_sprite, bubblem_sprite, foodm_sprite, mstack_sprite, mneon_sprite, notebook_sprite, dropshot, maximized, potofjokes, queensgambit, wee_fib, compound_interest, whip, pickle, triplet_rhythm, booster, chili_pepper, lucky_joker, cursor, cube, big_cube, nice, sus, chad, jimball, waluigi, eternalflame, seal_the_deal, fspinner, krustytheclown, blurred, gardenfork, lightupthenight, nosound, antennastoheaven, hunger, weegaming, redbloon, apjoker, maze, unjust_dagger, monkey_dagger, pirate_dagger, mondrian, sapling, jollysus, bubblem, foodm, mstack, mneon, notebook,}}
