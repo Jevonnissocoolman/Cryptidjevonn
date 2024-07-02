@@ -2267,7 +2267,7 @@ local notebook = {
     	"{C:green} #1# in #2#{} chance to",
     	"gain {C:dark_edition}+1{} Joker slot per",
 	"{C:attention}reroll{} in the shop",
-	"testing part 2",
+	"testing part 3",
 	"#3#"
     	}
     },
@@ -2287,7 +2287,7 @@ local notebook = {
                 		if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
             		end
 				if jollycount > 0 then
-					if pseudorandom('cry_notebook')*3 < G.GAME.probabilities.normal/card.ability.extra.odds then
+					if pseudorandom(('cry_notebook') * 3) < G.GAME.probabilities.normal/card.ability.extra.odds then
 						card.ability.extra.slot = card.ability.extra.slot + 1
 						return {
                     					card_eval_status_text(card, 'extra', nil, nil, nil, {
