@@ -2267,7 +2267,7 @@ local notebook = {
     	"{C:green} #1# in #2#{} chance to",
     	"gain {C:dark_edition}+1{} Joker slot per",
 	"{C:attention}reroll{} in the shop",
-	"testing part 3",
+	"testing part 33",
 	"#3#"
     	}
     },
