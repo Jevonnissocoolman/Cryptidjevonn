@@ -2260,12 +2260,14 @@ local notebook = {
     name = "cry-notebook",
     key = "notebook",
     pos = {x = 0, y = 0},
-    config = {extra = {odds = 10}, jolly = {t_mult = 8, type = 'Pair'}},
+    config = {extra = {odds = 10, slot = 0}, jolly = {t_mult = 8, type = 'Pair'}},
     loc_txt = {
     name = 'Notebook',
     text = {
-    	"{C:attention}Jolly Joker{}",
-    	"{C:green}#1#",
+    	"{C:green} #1# in #2#{} chance to",
+    	"gain {C:dark_edition}+1{} Joker slot per",
+	"{C:attention}reroll{} in the shop",
+	"#3#"
     	}
     },
     rarity = 3,
@@ -2274,20 +2276,21 @@ local notebook = {
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
-	return {vars = {center.ability.extra.odds}}
+	return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.slot}}
     end,
     atlas = "notebook",
     calculate = function(self, card, context)
-    	    local jollycount = 0
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].ability.name == 'Jolly Joker' then 
-			jollycount = jollycount + 1
-			card.ability.extra.odds = card.ability.extra.odds - jollycount
-		end
-            end
-    end,
-    calc_dollar_bonus = function(self, card)
-            return card.ability.extra.odds
+    	    if context.reroll and not context.blueprint and not context.retrigger_joker then
+			if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds then
+				card.ability.extra.slot = card.ability.extra.slot + 1
+				return {
+                    			card_eval_status_text(card, 'extra', nil, nil, nil, {
+                        		message = "Upgrade!",
+                        		colour = G.C.FILTER,
+                    		})
+                		}
+			else return {calculated = true} end
+	    end
     end
 }
 local notebook_sprite = {
