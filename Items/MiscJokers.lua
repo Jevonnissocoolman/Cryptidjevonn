@@ -2267,6 +2267,7 @@ local notebook = {
     	"{C:green} #1# in #2#{} chance to",
     	"gain {C:dark_edition}+1{} Joker slot per",
 	"{C:attention}reroll{} in the shop",
+	"testing lmao",
 	"#3#"
     	}
     },
@@ -2280,7 +2281,7 @@ local notebook = {
     end,
     atlas = "notebook",
     calculate = function(self, card, context)
-    	    if context.reroll and not context.blueprint and not context.retrigger_joker then
+    	    if context.reroll_shop and not context.blueprint and not context.retrigger_joker then
 			if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds then
 				card.ability.extra.slot = card.ability.extra.slot + 1
 				return {
