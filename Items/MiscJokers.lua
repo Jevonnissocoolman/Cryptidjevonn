@@ -2268,7 +2268,7 @@ local notebook = {
     	"{C:dark_edition}+1{} Joker slot",
 	"per {C:attention}reroll{} in the shop",
 	"{C:green}Triple odds{} if there are 3",
-	"or more {C:attention} Jolly Jokers{},
+	"or more {C:attention} Jolly Jokers{}",
 	"{C:red}Works 1 time per round{}",
 	"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive}and #4##5#{}"
     	}
