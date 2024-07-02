@@ -2260,15 +2260,17 @@ local notebook = {
     name = "cry-notebook",
     key = "notebook",
     pos = {x = 0, y = 0},
-    config = {extra = {odds = 3, slot = 0}, jolly = {t_mult = 8, type = 'Pair'}},
+    config = {extra = {odds = 18, slot = 0, check = true, active = "Active", inactive = ""}, jolly = {t_mult = 8, type = 'Pair'}},
     loc_txt = {
     name = 'Notebook',
     text = {
-    	"{C:green} #1# in #2#{} chance to",
-    	"gain {C:dark_edition}+1{} Joker slot per",
-	"{C:attention}reroll{} in the shop",
-	"testing part 6",
-	"#3#"
+    	"{C:green} #1# in #2#{} chance to gain",
+    	"{C:dark_edition}+1{} Joker slot",
+	"per {C:attention}reroll{} in the shop",
+	"{C:green}Triple odds{} if there are 3",
+	"or more {C:attention} Jolly Jokers{},
+	"{C:red}Works 1 time per round{}",
+	"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive}and #4##5#{}"
     	}
     },
     rarity = 3,
@@ -2277,18 +2279,21 @@ local notebook = {
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = { set = 'Joker', key = 'j_jolly', specific_vars = {self.config.jolly.t_mult, self.config.jolly.type} }
-	return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.slot}}
+	return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.slot, center.ability.extra.active, center.ability.extra.inactive}}
     end,
     atlas = "notebook",
     calculate = function(self, card, context)
-    	    if context.reroll_shop and not context.blueprint and not context.retrigger_joker then
+    	    if context.reroll_shop and card.ability.extra.check and not context.blueprint and not context.retrigger_joker then
 			local jollycount = 0
             		for i = 1, #G.jokers.cards do
                 		if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
             		end
-				if jollycount > 0 then
+				if jollycount >= 3 then
 					if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds * 3 then
 						card.ability.extra.slot = card.ability.extra.slot + 1
+						card.ability.extra.check = false
+						card.ability.extra.active = ""
+						card.ability.extra.inactive = "Inactive"
 						return {
                     					card_eval_status_text(card, 'extra', nil, nil, nil, {
                         				message = "Upgrade!",
@@ -2299,6 +2304,9 @@ local notebook = {
 				else
 					if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds then
 						card.ability.extra.slot = card.ability.extra.slot + 1
+						card.ability.extra.check = false
+						card.ability.extra.active = ""
+						card.ability.extra.inactive = "Inactive"
 						return {
                     					card_eval_status_text(card, 'extra', nil, nil, nil, {
                         				message = "Upgrade!",
@@ -2308,6 +2316,19 @@ local notebook = {
 					else return {calculated = true} end
 				end
 	    end
+	    if context.end_of_round and not context.retrigger_joker and not context.blueprint then
+            	if not card.ability.extra.check then
+                	card.ability.extra.check = true
+			card.ability.extra.active = "Active"
+			card.ability.extra.inactive = ""
+                	return {
+                    	card_eval_status_text(card, 'extra', nil, nil, nil, {
+                        	message = "Reset",
+                        	colour = G.C.FILTER,
+                    	})
+                	}
+            	end
+            end
     end
 }
 local notebook_sprite = {
