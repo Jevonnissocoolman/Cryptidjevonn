@@ -2260,7 +2260,7 @@ local notebook = {
     name = "cry-notebook",
     key = "notebook",
     pos = {x = 0, y = 0},
-    config = {extra = {odds = 18, slot = 0, check = true, active = "Active", inactive = ""}, jolly = {t_mult = 8, type = 'Pair'}},
+    config = {extra = {odds = 15, slot = 0, check = true, active = "Active", inactive = ""}, jolly = {t_mult = 8, type = 'Pair'}},
     loc_txt = {
     name = 'Notebook',
     text = {
@@ -2268,9 +2268,9 @@ local notebook = {
     	"{C:dark_edition}+1{} Joker slot",
 	"per {C:attention}reroll{} in the shop",
 	"{C:green}Triple odds{} if there are 3",
-	"or more {C:attention} Jolly Jokers{}",
+	"or more {C:attention}Jolly Jokers{}",
 	"{C:red}Works 1 time per round{}",
-	"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive}and #4##5#{}"
+	"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive} and #4##5#){}"
     	}
     },
     rarity = 3,
@@ -2334,7 +2334,7 @@ local notebook = {
 local notebook_sprite = {
     object_type = "Atlas",
     key = "notebook",
-    path = "j_cry_caramel.png",
+    path = "j_cry_notebook.png",
     px = 71,
     py = 95
 }
