@@ -2260,7 +2260,7 @@ local notebook = {
     name = "cry-notebook",
     key = "notebook",
     pos = {x = 0, y = 0},
-    config = {extra = {odds = 10, slot = 0}, jolly = {t_mult = 8, type = 'Pair'}},
+    config = {extra = {odds = 15, slot = 0}, jolly = {t_mult = 8, type = 'Pair'}},
     loc_txt = {
     name = 'Notebook',
     text = {
@@ -2282,15 +2282,21 @@ local notebook = {
     atlas = "notebook",
     calculate = function(self, card, context)
     	    if context.reroll_shop and not context.blueprint and not context.retrigger_joker then
-			if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds then
-				card.ability.extra.slot = card.ability.extra.slot + 1
-				return {
-                    			card_eval_status_text(card, 'extra', nil, nil, nil, {
-                        		message = "Upgrade!",
-                        		colour = G.C.FILTER,
-                    		})
-                		}
-			else return {calculated = true} end
+			local jollycount = 0
+            		for i = 1, #G.jokers.cards do
+                		if G.jokers.cards[i].ability.name == 'Jolly Joker' then jollycount = jollycount + 1 end
+            		end
+				if jollycount > 0 then
+					if pseudorandom('cry_notebook') < G.GAME.probabilities.normal/card.ability.extra.odds then
+						card.ability.extra.slot = card.ability.extra.slot + 1
+						return {
+                    					card_eval_status_text(card, 'extra', nil, nil, nil, {
+                        				message = "Upgrade!",
+                        				colour = G.C.FILTER,
+                    				})
+                				}
+					else return {calculated = true} end
+				end
 	    end
     end
 }
