@@ -2285,7 +2285,7 @@ local notebook = {
 			card.ability.extra.odds = card.ability.extra.odds - jollycount
 		end
             end
-    end
+    end,
     calc_dollar_bonus = function(self, card)
             return card.ability.extra.odds
     end
